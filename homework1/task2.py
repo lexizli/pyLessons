@@ -11,6 +11,6 @@ except:
     print("Это было не число, пока!")
 
 if number > 99 and number < 999:
-    print((number%10) + ((number%100)//10) + (number//100))
+    print((number % 10) + ((number % 100) // 10) + (number // 100))
 else:
     print('Извините, но вы ввели не трехзначное число. Пока!')
