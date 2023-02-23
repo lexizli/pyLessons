@@ -8,7 +8,7 @@
 try:
     number = int(input("Введите трехзначное число: "))
 except:
-    print("Преобразование прошло неудачно")
+    print("Это было не число, пока!")
 
 if number > 99 and number < 999:
     print((number%10) + ((number%100)//10) + (number//100))
