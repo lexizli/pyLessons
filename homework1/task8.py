@@ -14,7 +14,7 @@ try:
 except:
     print("Что-то не то вы ввели, пока!")
 
-if part % column == 0 or part % row == 0:
+if (part % column == 0 or part % row == 0) and part < column * row:
     print("\nТакой кусочек можно отломить")
 else:
     print("\nТакой кусочек отломить невозможно")
