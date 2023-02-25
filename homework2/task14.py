@@ -11,6 +11,6 @@ if total <= 0:
     print('Для чисел меньше единицы решения нет')
 else:
     degree = 1
-    while degree < total:
+    while degree <= total:
         print(degree, end = ' ')
         degree *= 2
