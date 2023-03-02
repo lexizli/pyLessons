@@ -9,5 +9,7 @@ for i in range(number):
     numbers_list.append(int(input()))
 value_to_find = int(input("Введите число, которое я буду искать: "))
 print(numbers_list)
-print(len([value for value in numbers_list if value == value_to_find]))
+# print(len([value for value in numbers_list if value == value_to_find]))
 
+result = numbers_list.count(int(value_to_find))
+print(result)

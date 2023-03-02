@@ -40,3 +40,13 @@ letters = {"A": 1, "E": 1, "I": 1, "O": 1, "U": 1, "L": 1, "N": 1, "S": 1, "T": 
 "Ф": 10, "Щ": 10, "Ъ": 10}
 the_word = input("Введите слово: ").replace(" ","").upper()     # вдруг кто по ошибке нажмет пробел?
 print([sum(letters[i] for i in the_word)])
+
+# second variant
+
+# ang_dict = {"AEIOULNSTRАВЕИНОРСТ": 1, "DGДКЛМПУ": 2,
+#             "BCMPБГЁЬЯ": 3, "FHVWYЙЫ": 4, "KЖЗХЦЧ": 5,
+#             "JXШЭЮ": 8, "QZФЩЪ": 10}
+#
+# word = input()
+#
+# print(sum([i[1] for i in ang_dict.items() for j in word if j.upper() in i[0]]))
