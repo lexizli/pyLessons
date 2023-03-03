@@ -10,3 +10,5 @@ for i in range(counter_2):
 
 print('Числа, которые нашлись в первом списке: ' + str(sorted(set(numbers_1))))
 print('Числа, которые нашлись во втором списке: ' + str(sorted(set(numbers_1))))
+print(*sorted(set(numbers_1).intersection(numbers_2)))
+

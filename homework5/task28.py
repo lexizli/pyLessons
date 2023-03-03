@@ -7,8 +7,7 @@ def sum(a, b):
         return 1 + 1
     elif b > 1:
         return 1 + sum(a, b - 1)
-    else:
-        return sum(a - 1, b) + 1
+    return sum(a - 1, b) + 1
 
 
 num1 = int(input())

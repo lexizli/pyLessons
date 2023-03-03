@@ -6,8 +6,7 @@
 def rec_degree(base, degree):
     if degree == 2:
         return base * base
-    else:
-        return base * rec_degree(base, degree - 1)
+    return base * rec_degree(base, degree - 1)
 
 
 base = int(input())
