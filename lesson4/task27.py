@@ -10,5 +10,6 @@
 # shells on the sea shore I'm sure that the shells are sea
 # shore shells
 
-print(len(set(input("Вводите уже вашу строку: ").split())))
+# print(len(set(input("Вводите уже вашу строку: ").split())))
 
+print(len(input("Вводите уже вашу строку: ").split()))

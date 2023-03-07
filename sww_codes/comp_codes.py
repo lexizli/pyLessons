@@ -31,7 +31,7 @@ with open("kodes_till_28_02_2023.csv", encoding='utf-8') as r_file:
 
     bumba = list(file_reader)
 
-for item in bumba:
+#for item in bumba:
     print([bumba_val for bumba_val in bumba if bumba_val["Product code"] == "475T-FAS-90|52-54_182-188"])
 
 # time.sleep(5)

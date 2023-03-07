@@ -4,8 +4,8 @@
 # с помощью рекурсии.
 
 def rec_degree(base, degree):
-    if degree == 2:
-        return base * base
+    if degree == 0:
+        return 1
     return base * rec_degree(base, degree - 1)
 
 
