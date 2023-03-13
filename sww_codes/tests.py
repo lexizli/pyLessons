@@ -32,31 +32,19 @@
 #     print(a2, b2)
 # else:
 #     print(a2, b1)
-
-from time import time
-from random import choices
-start = time()
-
-liss = choices(range(3000), k=2000)
-
-# # liss = [1, 2, 3, 5, 8, 15, 23, 38]
 #
-# liss2 = []
-# liss2.append([f'{x}, {x * x}' for x in liss if x % 2 == 0])
 
-#
-# def select(f, col):
-#     return [f(x) for x in col]
-#
-# def where(f, col):
-#     return [x for x in col if f(x)]
+from math import *
 
-liss2 = map(int, liss)
-liss2 = filter(lambda x: x % 2 == 0, liss2)
-liss2 = list(map(lambda x: (x, x ** 2), liss2))
+a, b, c = float(input()), float(input()), float(input())
+des = b * b - 4 * a * c
+if des < 0:
+    print("Нет корней")
+elif des == 0:
+    print(-b /(2 * a))
+else:
+    print((-b + des ** 0.5 )/(2 * a))
+    print((-b - des ** 0.5 )/(2 * a))
 
-print(time() - start)
 
-print(liss)
-print(liss2)
 
