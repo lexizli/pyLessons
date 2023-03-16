@@ -53,7 +53,8 @@ def show_all():  # show all records. If number of records more 10, show by 10
 
 
 def search(lissy, instr):   # find number
-    print([x for x in lissy if instr in x])
+    # lissy_lower = map(lambda x: x.lower, lissy)
+    print(*[x for x in lissy if instr in x], sep="\n")
 
 def add_new_contact():
     pass
@@ -106,7 +107,7 @@ def main_menu():
             case "1":
                 show_all()
             case "2":
-                to_find = input('What do you search ? > ').lower()
+                to_find = input('What do you search ? > ')
                 search(all_data, to_find)
 
             case "3":
