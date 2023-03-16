@@ -25,7 +25,7 @@
 
 
 
-from os import path
+from os import path, stat
 import csv
 
 filename = "phones.csv"
@@ -33,26 +33,27 @@ last_id = 0
 all_data = []
 
 
-def show_all():
+def show_all():  # show all records. If number of records more 10, show by 10
     if all_data:
         # print(*all_data, sep="\n")
         records = len(all_data)
         i = 0
-        while i <= records:
+        while i < records:
             j = 0
-            while j < 10:
+            while j < 10 and i < records:
                 print(all_data[i])
                 i += 1
                 j += 1
-            if input('More? 1 — Yes > ') != '1':
+                print(i, records)
+            ans = input('More? Y — Yes > ').lower()
+            if ans != 'y' and ans != 'н':
                 break
-
-        print(records)
     else:
         print("No records yet")
 
-def search():
-    pass
+
+def search(lissy, instr):   # find number
+    print([x for x in lissy if instr in x])
 
 def add_new_contact():
     pass
@@ -66,22 +67,32 @@ def delete():
 def imp():
     pass
 
-def read_csv_to_list(listname, filename, last_id):
-    r_file = open(filename, encoding='utf-8')
-    file_reader = csv.DictReader(r_file, delimiter=";")
 
-    for row in file_reader:
-        listname.append(row['userid'] + ' ' + row['firstname'] + ' '
-                        + row['patrinymic'] + ' ' + row['lastname'] + ' ' + row['phone'])
-    last_id = int(row['userid'])
-    r_file.close()
+def read_csv_to_list(filename, last_id):
+    global all_data
+    all_data = []
+    if not path.exists(filename):
+        # print("No file exists")
+        # return -1
+        with open(filename, "w", encoding="utf-8") as _:
+            pass
+    else:
+        r_file = open(filename, encoding='utf-8')
+        file_reader = csv.DictReader(r_file, delimiter=";")
+        if stat(filename).st_size != 0:
+            for row in file_reader:
+                all_data.append(row['userid'] + ' ' + row['firstname'] + ' '
+                                + row['patrinymic'] + ' ' + row['lastname'] + ' ' + row['phone'])
+            last_id = int(row['userid'])
+        r_file.close()
 
 
 def main_menu():
     play = True
 
     while play:
-        read_csv_to_list(all_data, filename, last_id)
+        if read_csv_to_list(filename, last_id):
+            break
         answer = input("\nPhone book. Select operation:\n\n"
                        "1. Show all\n"
                        "2. Search\n"
@@ -89,13 +100,15 @@ def main_menu():
                        "4. Edit\n"
                        "5. Delete\n"
                        "6. Export\n"
-                       "7. Import\n"
-                       "8. Exit\n")
+                       "7. Import\n\n"
+                       "0. Exit\n")
         match answer:
             case "1":
                 show_all()
             case "2":
-                search()
+                to_find = input('What do you search ? > ').lower()
+                search(all_data, to_find)
+
             case "3":
                 add_new_contact()
             case "4":
@@ -106,10 +119,10 @@ def main_menu():
                 export()
             case "7":
                 imp()
-            case "8":
+            case "0":
                 play = False
             case _:
-                print("Try again!\n")
+                print("Try again!")
 
 
 main_menu()
