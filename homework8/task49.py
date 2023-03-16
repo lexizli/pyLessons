@@ -1,6 +1,7 @@
 # Программа по управлению телефонным справочником.
 #
-# Формат файла, в котором хранится справочник — csv (текстовый файл с разделителями). Разделитель — запятая Кодировка — utf-8
+# Формат файла, в котором хранится справочник — csv (текстовый файл с разделителями).
+# Разделитель — запятая Кодировка — utf-8
 #
 # Поля справочника:
 #
@@ -23,8 +24,6 @@
 # id;firstname;patrinymic;lastname;phone
 #
 
-
-
 from os import path, stat
 import csv
 
@@ -44,7 +43,6 @@ def show_all():  # show all records. If number of records more 10, show by 10
                 print(all_data[i])
                 i += 1
                 j += 1
-                print(i, records)
             ans = input('More? Y — Yes > ').lower()
             if ans != 'y' and ans != 'н':
                 break
@@ -57,7 +55,16 @@ def search(lissy, instr):   # find number
     print(*[x for x in lissy if instr in x], sep="\n")
 
 def add_new_contact():
-    pass
+    global last_id
+    array = ["firstname", "patrinymic", "lastname", "phone"]
+    string = ""
+    for i in array:
+        string += input(f"Enter {i} > ") + " "
+
+    all_data.append(f"{last_id} {string}\n")
+
+    last_id += 1
+
 
 def edit():
     pass
@@ -69,8 +76,12 @@ def imp():
     pass
 
 
-def read_csv_to_list(filename, last_id):
-    global all_data
+# def to_phone_number(stri):
+#     return (f'{stri[:2]}({stri[2:5]}){stri[5:8]}-{stri[8:10]}-{stri[10:12]}')
+
+
+def read_csv_to_list(filename):
+    global all_data, last_id
     all_data = []
     if not path.exists(filename):
         # print("No file exists")
@@ -79,7 +90,7 @@ def read_csv_to_list(filename, last_id):
             pass
     else:
         r_file = open(filename, encoding='utf-8')
-        file_reader = csv.DictReader(r_file, delimiter=";")
+        file_reader = csv.DictReader(r_file, delimiter=",")
         if stat(filename).st_size != 0:
             for row in file_reader:
                 all_data.append(row['userid'] + ' ' + row['firstname'] + ' '
@@ -88,11 +99,29 @@ def read_csv_to_list(filename, last_id):
         r_file.close()
 
 
+def wr_csv(filename):  # write file
+    global all_data
+    csvfile = open(filename, 'w', newline='')
+    fieldnames = ['userid', 'firstname', 'patrinymic', 'lastname', 'phone']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for x in all_data:
+        nline = x.split()
+        writer.writerow(
+            {'userid': nline[0],
+             'firstname': nline[1],
+             'patrinymic': nline[2],
+             'lastname': nline[3],
+             'phone': nline[4]})
+    csvfile.close()
+
+
 def main_menu():
     play = True
 
     while play:
-        if read_csv_to_list(filename, last_id):
+        if read_csv_to_list(filename):
             break
         answer = input("\nPhone book. Select operation:\n\n"
                        "1. Show all\n"
@@ -106,6 +135,7 @@ def main_menu():
         match answer:
             case "1":
                 show_all()
+                # print(last_id)
             case "2":
                 to_find = input('What do you search ? > ')
                 search(all_data, to_find)
@@ -124,6 +154,24 @@ def main_menu():
                 play = False
             case _:
                 print("Try again!")
-
+        wr_csv(filename)
 
 main_menu()
+
+
+# # def wr_csv(filename):  # write file
+# #     global all_data
+# #     csvfile = open(filename, 'w', newline='')
+# #     fieldnames = ['userid', 'firstname', 'patrinymic', 'lastname', 'phone']
+# #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+# #     writer.writeheader()
+# #
+# #     for x in all_data:
+# #         nline = x.split()
+# #         writer.writerow(
+# #             {'userid': nline[0],
+# #              'firstname': nline[1],
+# #              'patrinymic': nline[2],
+# #              'lastname': nline[3],
+# #              'phone': nline[4]})
+# #     csvfile.close()
