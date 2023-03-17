@@ -32,14 +32,15 @@ last_id = 0
 all_data = []
 
 
-def show_all():  # show all records. If number of records more 10, show by 10
+# Show records by row_counter if number of records more row_counter
+def show_all(row_counter=10):
     if all_data:
         # print(*all_data, sep="\n")
         records = len(all_data)
         i = 0
         while i < records:
             j = 0
-            while j < 10 and i < records:
+            while j < row_counter and i < records:
                 print(all_data[i])
                 i += 1
                 j += 1
@@ -50,9 +51,15 @@ def show_all():  # show all records. If number of records more 10, show by 10
         print("No records yet")
 
 
+# Search records by any part
 def search(lissy, instr):   # find number
-    # lissy_lower = map(lambda x: x.lower, lissy)
-    print(*[x for x in lissy if instr in x], sep="\n")
+    founded = len([x for x in lissy if instr in x])
+    if founded > 0:
+        print(f'Founded {founded}', end="\n\t")
+        print(*[x for x in lissy if instr in x], sep="\n\t")
+    else:
+        print('No records founded')
+
 
 def add_new_contact():
     global last_id
