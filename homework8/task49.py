@@ -21,7 +21,7 @@
 # Импорт из текстового файла (с парсингом?)
 # Конец работы
 #
-# id;firstname;patrinymic;lastname;phone
+# userid;firstname;patrinymic;lastname;phone
 #
 
 from os import path, stat
@@ -76,8 +76,15 @@ def add_new_contact():
 def edit():
     pass
 
+
+# delete data not userid
 def delete():
-    pass
+    id_for_clear = int(input('What record to delete? Input ID, please >'))-1
+    print(all_data[id_for_clear])
+    really = input('Delete this record? Press Y for yes > ').lower()
+    if really == 'y' or really == 'н':
+        all_data[id_for_clear] = str(id_for_clear+1) + ' [deleted] [deleted] [deleted] [deleted]'
+
 
 def imp():
     pass
@@ -102,7 +109,7 @@ def read_csv_to_list(filename):
             for row in file_reader:
                 all_data.append(row['userid'] + ' ' + row['firstname'] + ' '
                                 + row['patrinymic'] + ' ' + row['lastname'] + ' ' + row['phone'])
-            last_id = int(row['userid'])
+            last_id = int(row['userid'])+1
         r_file.close()
 
 
@@ -115,12 +122,22 @@ def wr_csv(filename):  # write file
 
     for x in all_data:
         nline = x.split()
-        writer.writerow(
-            {'userid': nline[0],
-             'firstname': nline[1],
-             'patrinymic': nline[2],
-             'lastname': nline[3],
-             'phone': nline[4]})
+        if ' [deleted] [deleted] [deleted] [deleted]' in x or len(x.split()) == 1:
+            # nline = x.split()
+            writer.writerow(
+                {'userid': nline[0],
+                 'firstname': '',
+                 'patrinymic': '',
+                 'lastname': '',
+                 'phone': ''})
+        else:
+            # nline = x.split()
+            writer.writerow(
+                {'userid': nline[0],
+                 'firstname': nline[1],
+                 'patrinymic': nline[2],
+                 'lastname': nline[3],
+                 'phone': nline[4]})
     csvfile.close()
 
 
