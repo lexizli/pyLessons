@@ -26,6 +26,7 @@
 
 from os import path, stat
 import csv
+import re
 
 filename = "phones.csv"
 last_id = 0
@@ -88,6 +89,21 @@ def delete():
 
 def imp():
     pass
+
+
+# export all_data to text file
+def export():
+    global all_data
+    file_for_export = input('File name for export >')
+    only_name = re.match('^[a-zA-Z0-9_-]*', file_for_export).group()
+    if len(only_name) == 0:
+        print("Sorry, I can't use this file name")
+    filename_to_export = only_name + '.txt'
+    if len(all_data) > 0:
+        with open(filename_to_export, 'w', encoding='utf-8') as fe:
+            fe.write('userid firstname patrinymic lastname phone\n')
+            for i in all_data:
+                fe.write(i+'\n')
 
 
 # def to_phone_number(stri):
@@ -182,20 +198,3 @@ def main_menu():
 
 main_menu()
 
-
-# # def wr_csv(filename):  # write file
-# #     global all_data
-# #     csvfile = open(filename, 'w', newline='')
-# #     fieldnames = ['userid', 'firstname', 'patrinymic', 'lastname', 'phone']
-# #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-# #     writer.writeheader()
-# #
-# #     for x in all_data:
-# #         nline = x.split()
-# #         writer.writerow(
-# #             {'userid': nline[0],
-# #              'firstname': nline[1],
-# #              'patrinymic': nline[2],
-# #              'lastname': nline[3],
-# #              'phone': nline[4]})
-# #     csvfile.close()
