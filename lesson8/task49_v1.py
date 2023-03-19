@@ -26,26 +26,33 @@ import re
 # phone = input('Phone number >')
 # if
 
+
+
+
+
+
 # Пример использования re.search с дополнительными методами
-import re
-
-
-def if_phone(phone):
-    s_temp = "".join(phone.replace("-", "").replace("(", "").replace(")", "").split())
-    match = re.search(r'[8][\d]{10}', s_temp)
-    if match and len(s_temp) == 11:
-        return re.sub(r'^8', '+7', match.string)
-    match = re.search(r'[+7][\d]{11}', s_temp)
-    if match and len(s_temp) == 12:
-        return match.string
-    return False
-
-
-def if_name(stri):
-    match = re.search(r"^[А-Я]?[а-я]*", stri)
-    if len(match.group()) > 1 and len(stri) > 1:
+# import re
+#
+#
+# def if_phone(phone):
+#     s_temp = "".join(phone.replace("-", "").replace("(", "").replace(")", "").split())
+#     match = re.search(r'[8][\d]{10}', s_temp)
+#     if match and len(s_temp) == 11:
+#         return re.sub(r'^8', '+7', match.string)
+#     match = re.search(r'[+7][\d]{11}', s_temp)
+#     if match and len(s_temp) == 12:
+#         return match.string
+#     return False
+#
+#
+def if_string(stri):
+    match = re.search(r"^([А-Я]?[а-я]*[ -]?)*", stri)
+    if match:
         print(match, match.span(), match.string, match.group(), sep='\n')
-        return match.group()
+        if len(match.group()) > 1 and len(stri) > 1:
+            print(match, match.span(), match.string, match.group(), sep='\n')
+            return match.string
     return False
 
 
@@ -61,5 +68,10 @@ arr = ["firstname", "patrinymic", "lastname"]
 
 inp = False
 while not inp:
-    inp = if_name(input('Input name > '))
+    inp = if_string(input(f'Input text > '))
     print(inp)
+
+
+
+
+
