@@ -44,8 +44,21 @@ def get_export_filename():
         return only_name + '.txt'
 
 
+def get_import_filename():
+    while True:
+        file_for_import = input('File name for import >')
+        only_name = re.match('^[a-zA-Z0-9_-]*', file_for_import).group()
+        if len(only_name) == 0:
+            print("Sorry, I can't use this file name")
+        return only_name + '.txt'
+
+
 def exported():
     print('Export done')
+
+
+def imported(count):
+    print(f'Imported {count} new records')
 
 
 # Search records by any part
@@ -141,6 +154,10 @@ def edited_data(data_str):
                 for x in fields_to_edit:
                     edited_string = edited_string + x.strip() + ' '
                 return edited_string.strip()
+
+
+def no_file_for_import():
+    print('\033[31mNo file for import\033[0m')
 
 
 

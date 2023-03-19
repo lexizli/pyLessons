@@ -1,6 +1,7 @@
 import view
 from os import path, stat
-import csv, re
+import csv
+import re
 
 filename = "phones.csv"
 last_id = 0
@@ -31,8 +32,8 @@ def main_menu():
             case "6":
                 export()
             case "7":
-                pass
-                # imp()
+                if not file_import():
+                    view.no_file_for_import()
             case "0":
                 play = False
             case _:
@@ -117,6 +118,26 @@ def export():
             for i in all_data:
                 fe.write(i+'\n')
     view.exported()
+
+
+def file_import():
+    global all_data, last_id
+    filename_for_import = view.get_import_filename()
+    print(filename_for_import)
+    if not path.exists(filename_for_import):
+        return False
+
+    with open(filename_for_import, 'r', encoding='utf-8') as fim:
+        import_temp = [i.strip() for i in fim]
+        count = 0
+        for i in import_temp:
+            # print(i)
+            all_data.append(str(last_id) + ' ' + i + '\n')
+            last_id += 1
+            count += 1
+
+    view.imported(count)
+    return True
 
 
 def delete(id_for_clear):
