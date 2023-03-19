@@ -1,4 +1,5 @@
 import view
+# import view_ru as view
 from os import path, stat
 import csv
 import re
@@ -50,11 +51,8 @@ def add_new_contact():
     for i in array:
         string += view.get_line(i).capitalize()
 
-    print(string)
     string += view.get_phone_number()
-    print(string)
     string = str(last_id) + ' ' + string + '\n'
-    print(string)
 
     # all_data.append(f"{last_id} {string}\n")
     all_data.append(string)
