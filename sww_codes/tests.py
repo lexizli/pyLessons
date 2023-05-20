@@ -34,17 +34,28 @@
 #     print(a2, b1)
 #
 
-from math import *
+# [print('AAA') for _ in range(6)]
+# [print('BBBB') for _ in range(5)]
+# print('E')
+# [print('TTTTT') for _ in range(9)]
+# print('G')
+#
+#
+#
+# stri = input()
+# for i in range[10]:
+#     print(f'{i} {stri}')
 
-a, b, c = float(input()), float(input()), float(input())
-des = b * b - 4 * a * c
-if des < 0:
-    print("Нет корней")
-elif des == 0:
-    print(-b /(2 * a))
-else:
-    print((-b + des ** 0.5 )/(2 * a))
-    print((-b - des ** 0.5 )/(2 * a))
+m, n = int(input()), int(input())
+
+# for i in range(2 * ((m + 1) // 2) - 1, 2 * (n // 2) - 1, -2):
+#     print(i)
+start = ((m - 1) // 2) * 2 + 1
+
+for i in range(start, n - 1, -2):
+    print(i)
 
 
+# stri = input()
+# [print(f'{i} {stri}') for i in range(10)]
 
