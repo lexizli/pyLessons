@@ -38,18 +38,26 @@ from os import path
 #
 # print(len(file_temp))
 
-fname = 'ozon_stock.csv'
-r_file_s_ozon = open(fname, encoding='utf-8')
-ozon_stock = csv.DictReader(r_file_s_ozon, delimiter=";", quotechar='"')
-# print(ozon_stock.line_num)
-# print(ozon_stock.__sizeof__())
-#
-# numline = len(r_file_s_ozon.readlines())
-# print(numline)
+filename = 'products_stock_tikhvin.csv'
 
-test = ozon_stock.__next__()
-print(test['product_code'])
+if not path.exists(filename):
+    exit('File stock_out.csv not exists')
+else:
+    r_file = open(filename, encoding='utf-8')
+    file_temp = r_file.readlines()
+    r_file.close()
 
-for i in range(29):
-    test = ozon_stock.__next__()
-    print(test)
+pst_head_and_sorted = []
+
+for line in file_temp:
+    line = line.replace('"', '')
+    kwo = line.split(';')
+    if len(kwo[3]) == 13 and kwo[3][0] == "2":
+        pst_head_and_sorted.append(str(kwo[3]) + ';' + str(kwo[4]) + ';' + str(kwo[5].strip()))
+
+    #     print(kwo[3])
+
+pst_head_and_sorted.sort()
+
+for line in pst_head_and_sorted:
+    print(line)

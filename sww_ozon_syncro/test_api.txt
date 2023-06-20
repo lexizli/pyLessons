@@ -1,0 +1,1 @@
+['{"result":[{"product_id":497981799, "present":34, "reserved":0, "fbs_sku":946756271, "warehouse_id":20958918207000, "warehouse_name":"Тихвин, Мебельная 1"}]}']
